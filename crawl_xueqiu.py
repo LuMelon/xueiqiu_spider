@@ -1,12 +1,12 @@
 import requests
-from spider.UA import agents
+from UA import agents
 import random
 import time
 import json
-from spider.stock_queue import StockMongo
+from stock_queue import StockMongo
 from lxml import html
 import multiprocessing
-from spider.thread_pool import ThreadPool#自己写的线程池
+from thread_pool import ThreadPool#自己写的线程池
 
 
 headers={
