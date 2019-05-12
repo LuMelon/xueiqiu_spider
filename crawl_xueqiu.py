@@ -90,7 +90,7 @@ def get_comment():#默认是不使用dialing
         for num  in range(1,101):#遍历一到100页
             pool.run(func=thread_get_comment,args=(num,))
 
-    while Stock_database:
+    while Stock_database is not None:
         try:
             symbol = Stock_database.pop()
             comment_crawler()
