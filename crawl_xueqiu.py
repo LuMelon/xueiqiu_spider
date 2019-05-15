@@ -92,7 +92,7 @@ def get_comment():#默认是不使用dialing
 
     while Stock_database is not None:
         try:
-            symbol = Stock_database.pop()
+            symbol = Stock_database.pop() #这个地方要取数据，但是目前没有数据
             comment_crawler()
             time.sleep(2)
         except KeyError:#队列没有数据了
@@ -100,18 +100,18 @@ def get_comment():#默认是不使用dialing
             break
 
 
-
-
 def process_crawler():
-    process=[]
-    num_cups=multiprocessing.cpu_count()
-    print('将会启动的进程数为',num_cups)
-    for i in range(int(num_cups)-2):
-        p=multiprocessing.Process(target=get_comment)#创建进程
-        p.start()
-        process.append(p)
-        for p in process:
-            p.join()
+    # process=[]
+    # num_cups=multiprocessing.cpu_count()
+    # print('将会启动的进程数为',num_cups)
+    # for i in range(int(num_cups)-2):
+    #     p=multiprocessing.Process(target=get_comment)#创建进程
+    #     p.start()
+    #     process.append(p)
+    #     for p in process:
+    #         p.join()
+    get_comment()
+
 if __name__ == '__main__':
     process_crawler()
 
