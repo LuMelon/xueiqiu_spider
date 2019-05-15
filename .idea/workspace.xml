@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db45dbc2-b493-49c4-a2c7-0ece5f869fea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/xueiqiu_spider.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/xueiqiu_spider.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawl_xueqiu.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawl_xueqiu.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stock_queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_queue.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stock_queue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="800">
-              <caret line="61" column="59" lean-forward="true" selection-start-line="61" selection-start-column="59" selection-end-line="61" selection-end-column="59" />
+            <state relative-caret-position="19">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#41#56#0" expanded="true" />
               </folding>
@@ -184,7 +180,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13016000" />
+    <option name="totallyTimeSpent" value="13360000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -281,8 +277,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stock_queue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="61" column="59" lean-forward="true" selection-start-line="61" selection-start-column="59" selection-end-line="61" selection-end-column="59" />
+        <state relative-caret-position="19">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#41#56#0" expanded="true" />
           </folding>

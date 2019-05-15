@@ -27,24 +27,18 @@ real_time=str(a).replace('.','')[0:-1]
 def get_data(num):#默认是不使用dialing
     Stock_database=StockMongo('xueqiu','stocks_list')
     url=stocks_url.format(page=str(num),real_time=real_time)#股票列表URL
-    print("get data")
     while True:
-        print("while loop")
         session = requests.session()
-        print("after session")
         # proxy = requests.get('http://localhost:5000/get').text  # 获取本地代理池代理
         idx = np.random.randint(len(proxies))
         proxy = '%s:%s'%(proxies[idx]['ip'], proxies[idx]['port'])
-        print("debug2")
 
         if proxies[idx]["type"] == "https":
             thisproxies = {'https': 'https://{}'.format(proxy)}
         else:
             thisproxies = {'http': 'http://{}'.format(proxy)}
-        print("debug3:", thisproxies)
 
         session.proxies = thisproxies  # 携带代理
-        print("after proxy")
         try:
             html = session.get(url='https://xueqiu.com/', headers=headers)
             print(html)
@@ -53,13 +47,10 @@ def get_data(num):#默认是不使用dialing
                 stocks=json.loads(stocks_list.text)['stocks']
                 print("stocks:", stocks[0])
                 for stork in stocks:
-                    print()
                     current=stork.get('current'),#获取价格
                     name=stork.get('name')
                     symbol=stork.get('symbol')
-                    print("-----info:", current, name, symbol)
                     Stock_database.push_stocks(symbol=symbol,name=name,current_price=current)
-                    print("########insert items completed")
                 break
         except:
             print('获取失败，准备重新获取')#失败后要
