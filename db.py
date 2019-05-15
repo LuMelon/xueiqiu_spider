@@ -8,7 +8,7 @@ class StockMongo(object):
     PROCESSING = 2
     COMPLETE = 3
     def __init__(self,db,collection,timeout=300):
-        self.client = MongoClient()
+        self.client = MongoClient(username='admin', password='admin123')
         self.databese=self.client[db]
         self.db=self.databese[collection]
         self.timeout = timeout

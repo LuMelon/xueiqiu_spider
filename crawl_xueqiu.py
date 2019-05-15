@@ -1,6 +1,8 @@
 import requests
 from UA import agents
 import random
+import numpy as np
+from proxies import proxies
 import time
 import json
 from stock_queue import StockMongo
@@ -34,13 +36,18 @@ def get_comment():#默认是不使用dialing
     real_time = str(a).replace('.', '')[0:-1]#获取当前时间
 
     def thread_get_comment(num):
-        while True:
-            session = requests.session()
-            proxy = requests.get('http://localhost:5000/get').text  # 获取本地代理池代理
-            if proxy:
-                proxies = {'http': 'http://{}'.format(proxy),
-                           'https': 'http://{}'.format(proxy), }
-                session.proxies = proxies  # 携带代理
+            while True:
+                session = requests.session()
+                # proxy = requests.get('http://localhost:5000/get').text  # 获取本地代理池代理
+                idx = np.random.randint(len(proxies))
+                proxy = '%s:%s' % (proxies[idx]['ip'], proxies[idx]['port'])
+
+                if proxies[idx]['type'] == "http":
+                    thisproxies = {'http': 'http://{}'.format(proxy)}
+                else:
+                    thisproxies = {'https': 'https://{}'.format(proxy), }
+
+                session.proxies = thisproxies  # 携带代理
                 try:
                     url = comment_url.format(symbol=symbol, page=str(num[0]), real_time=real_time)  # 股票列表URL
                     # print(url)
@@ -79,10 +86,9 @@ def get_comment():#默认是不使用dialing
                     # print('获取失败，准备重新获取')  # 失败后再来
                     time.sleep(10)
                     continue
-            else:
-
-                time.sleep(15)  # 等待重新获取代理
-                continue
+                else:
+                    time.sleep(15)  # 等待重新获取代理
+                    continue
 
 
     def comment_crawler():
@@ -101,16 +107,16 @@ def get_comment():#默认是不使用dialing
 
 
 def process_crawler():
-    # process=[]
-    # num_cups=multiprocessing.cpu_count()
-    # print('将会启动的进程数为',num_cups)
-    # for i in range(int(num_cups)-2):
-    #     p=multiprocessing.Process(target=get_comment)#创建进程
-    #     p.start()
-    #     process.append(p)
-    #     for p in process:
-    #         p.join()
-    get_comment()
+    process=[]
+    num_cups=multiprocessing.cpu_count()
+    print('将会启动的进程数为',num_cups)
+    for i in range(int(num_cups)-2):
+        p=multiprocessing.Process(target=get_comment)#创建进程
+        p.start()
+        process.append(p)
+        for p in process:
+            p.join()
+    # get_comment()
 
 if __name__ == '__main__':
     process_crawler()
