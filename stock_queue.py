@@ -41,11 +41,11 @@ def get_data(num):#默认是不使用dialing
         session.proxies = thisproxies  # 携带代理
         try:
             html = session.get(url='https://xueqiu.com/', headers=headers)
-            print(html)
+            print("#####html:", html)
             stocks_list = session.get(url, headers=headers)
             if stocks_list.status_code == 200:
                 stocks=json.loads(stocks_list.text)['stocks']
-                print("stocks:", stocks[0])
+                print("------stocks:", stocks[0])
                 for stork in stocks:
                     current=stork.get('current'),#获取价格
                     name=stork.get('name')

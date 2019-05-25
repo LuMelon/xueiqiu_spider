@@ -27,6 +27,16 @@ class StockMongo(object):
         except errors.DuplicateKeyError as  e:#这里预防万一，怕股票有重复
             print(name,'已经存在于数据库')
             pass
+
+    def push_events(self,keywords,label):#将股票代码插进数据库，以备爬取评论的时候提取
+        try:
+            self.db.insert({'_id':keywords,'status':self.OUTSIANDING,'label':label})#股票代码作为表的ID
+            print(keywords,label,'股票插入成功')
+        except errors.DuplicateKeyError as  e:#这里预防万一，怕股票有重复
+            print(keywords,'已经存在于数据库')
+            pass
+
+
     def pop(self):
         """
                 这个函数会查询队列中的所有状态为OUTSTANDING的值，
