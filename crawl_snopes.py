@@ -113,6 +113,7 @@ def get_data(url):
             continue
 
 def TwitterSource(blockquotes):
+    print("--------def TwitterSource(blockquotes)--------")
     flag = False
     source = ''
     for quote in blockquotes:
@@ -128,20 +129,27 @@ def TwitterSource(blockquotes):
     return flag, source
 
 def FacebookSource(content):
+    print("-------def FacebookSource(content)-------")
     flag = False
     source = ''
-    if content.iframe is not None:
+    if content.iframe is not None and content.iframe['src'].find("facebook.com") != -1:
+        print("------ If Loop --------:", content.iframe['src'])
         flag = True
         src = content.iframe['src'].split('href=')[1].split('&width')[0]
+        print("----- src in Facebook---:", src)
         source = urllib.parse.unquote(src)
+        print("----- source in Facebook -----:", source)
+    print("------- before return in FacebookSource------")
     return flag, source
 
 def ExtractThePage(html):
+    print("------ ExtractThePage-----------")
     soup = Soup(html.text, 'html.parser')
     content = soup.select('div[class=content]')[0]
     flag, source = TwitterSource(content.select('blockquote'))
     if not flag:
         flag, source = FacebookSource(content)
+    print("return flag and source")
     return flag, source
 
 def ConstructSession():
@@ -181,8 +189,9 @@ def get_source(url):
 
         if html.status_code == 200:
             keywords = url.split('/')[-2]
+            print("-----200 type handler-----")
             flag, source = ExtractThePage(html)
-            print("-----200 type handler-----\n" + flag + ':' + source)
+            # print("-----200 type handler-----\n" + flag + ':' + source)
             WriteFile(flag, keywords, source, url)
             break
         elif html.status_code ==404:
